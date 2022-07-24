@@ -1,34 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React, { useState } from "react";
+import GoodByeWorld from "./GoodByeWorld";
+import HelloWorld from "./HelloWorld";
+import CurrentTime from "./CurrentTime";
+import ChangeWeather from "./ChangeWeather";
 
-function App() {
-  const [count, setCount] = useState(0)
+function App(props) {
+  const [weather, setWeather] = useState('sunny')
+
+  // flips weather from 'sunny' to 'cloudy'
+  function updateWeather() {
+    if (weather === 'sunny') {
+      setWeather('cloudy')
+    } else {
+      setWeather('sunny')
+    }
+  }
+
+
+  const description = "Very"
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <div>
+      <CurrentTime />
+      <HelloWorld
+        weather={weather}
+        prefix={description}
+      />
+      <GoodByeWorld
+        weather={weather}
+        prefix={description}
+      />
+      <ChangeWeather updateWeather={updateWeather} />
     </div>
-  )
+  );
 }
 
 export default App
